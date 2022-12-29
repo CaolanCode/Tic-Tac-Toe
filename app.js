@@ -1,27 +1,21 @@
 const Gameboard = (() => {
   const gameBoard = new Array(9).fill(''); 
-  const player1 = []
-  const player2 = []
 
   
   return{
     gameBoard,
-    player1,
-    player2,
 
   }
 })();
-console.log(Gameboard.gameBoard);
 
-function changePlayer(event){
-  if(!Gameboard.gameBoard.includes('X') || !Gameboard.gameBoard.includes('O')){
-    event.target.classList.toggle('player-x');
-    if(playerButton.textContent === 'X'){
-      playerButton.textContent = 'O';
-    } else {
-      playerButton.textContent = 'X';
-    }
-  }
+const Player = (name, marker, id) => {
+  const getName = () => name;
+  const getMarker = () => marker;
+  const getID = () => id;
+  
+  return {getName, getMarker, getID}
 }
-const playerButton = document.querySelector('.player-button');
-playerButton.addEventListener('click', changePlayer);
+
+const player1 = Player("Player 1", "X", "player1")
+console.log(Gameboard.gameBoard);
+console.log(player1.getName());
