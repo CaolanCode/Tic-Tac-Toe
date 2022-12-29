@@ -24,6 +24,7 @@ body{
   align-content: center;
   justify-content: center;
   height: 90vh;
+  gap: 3vh;
 }
 .board div{
   display: flex;
@@ -32,4 +33,5 @@ body{
   font-size: 3rem;
   border: 1px black solid;
   color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 }
