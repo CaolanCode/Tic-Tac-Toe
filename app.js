@@ -1,28 +1,36 @@
-// grameboard module function
+// gameboard module function
 const Gameboard = (() => {
   const gameBoard = new Array(9).fill(''); 
-
-  
-  return{
-    gameBoard,
-
-  }
-})();
+  return{gameBoard}
+});
 
 // player factory function
-const Player = (name, marker, id) => {
-  const getName = () => name;
-  const getMarker = () => marker;
-  const getID = () => id;
-  
-  return {getName, getMarker, getID}
+const Player = (name, marker) => {
+  const getName = () => name
+  const getMarker = () => marker
+  return {getName, getMarker}
 }
 
-const displayController = (() => {
-
-})
-
-console.log(Gameboard.gameBoard);
+//create players
 const player1 = Player("Player 1", "X", "player1")
 const player2 = Player("Player 2", "O", "player2")
-console.log(player1.getName());
+
+// module to play game, run on load
+const playGame = (() => {
+  const {gameBoard} = Gameboard
+  let marker = player1.getMarker()
+
+  // display markers on board
+  const displayMarkers = (event) => {
+    const index = event.target.getAttribute('data-index')
+    console.log(index)
+  }
+
+  // add event listener to each box
+  const boxes = Array.from(document.getElementsByClassName('box'))
+  function addListener(){
+    boxes.forEach((box) => box.addEventListener('click', displayMarkers))
+  }
+  addListener()
+
+})()
