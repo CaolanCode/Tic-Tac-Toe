@@ -11,19 +11,18 @@ const Player = (name, marker) => {
   return {getName, getMarker}
 }
 
-//create players
-const player1 = Player("Player 1", "X", "player1")
-const player2 = Player("Player 2", "O", "player2")
 
 // module to play game, run on load
 const playGame = (() => {
+  const player1 = Player("Player 1", "X")
+  const player2 = Player("Player 2", "O")
   const {gameBoard} = Gameboard()
   let currentPlayer = player1.getName()
   let marker = player1.getMarker()
 
   // display markers on board
   const displayMarkers = (event) => {
-    const index = event.target.getAttribute('data-index')
+    const index = `${event.target.id}`
     event.target.removeEventListener('click', displayMarkers)
     event.target.textContent = marker
     gameBoard[index] = marker
@@ -43,10 +42,10 @@ const playGame = (() => {
   }
 
   // add event listener to each box
-  const boxes = Array.from(document.getElementsByClassName('box'))
-  function addListener(){
+  const addListener = (() => {
+    const boxes = Array.from(document.getElementsByClassName('box'))
     boxes.forEach((box) => box.addEventListener('click', displayMarkers))
-  }
+  })
   addListener()
   
   // remove listeners after win
@@ -54,6 +53,20 @@ const playGame = (() => {
     const boxes = Array.from(document.getElementsByClassName('box'))
     boxes.forEach((box) => box.removeEventListener('click', displayMarkers))
   })
+
+  // reset board 
+  const resetBoard = (() => {
+      for(let i = 0; i < gameBoard.length; i++){
+        const box = document.getElementById(`${i}`)
+        gameBoard[i] = ''
+        box.textContent = gameBoard[i]
+      }
+    addListener()
+  })
+
+  // add listener to reset button
+  const resetButton = document.getElementById('reset')
+  resetButton.addEventListener('click', resetBoard)
 
   // check for winner
   const checkWinner = (() => {
@@ -88,6 +101,6 @@ const playGame = (() => {
       return false
     }
   })
-
+  return {addListener}
 })()
 
