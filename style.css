@@ -23,7 +23,7 @@ body{
   grid-template-rows: repeat(3, 20vh);
   align-content: center;
   justify-content: center;
-  height: 90vh;
+  height: 80vh;
   gap: 3vh;
 }
 .box{
@@ -34,4 +34,18 @@ body{
   border: 1px black solid;
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
+}
+.footer{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#reset{
+  padding: 1vh 1vw;
+  border-radius: 3vh;
+  border: none;
+  background-color: white;
+  font-size: 1rem;
+  font-weight: 700;
 }
