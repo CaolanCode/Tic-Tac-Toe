@@ -12,10 +12,10 @@ const Player = (name, marker) => {
 }
 
 // display winner on screen
-const displayWinner = ((player) => {
+const displayWinner = ((marker) => {
   const winContainer = document.getElementById('winner-container')
   winContainer.classList.add('active')
-  winContainer.textContent = `The winner is ${player}`
+  winContainer.textContent = `The winner is ${marker}'s`
 })
 
 // clear display when reset
@@ -39,11 +39,9 @@ const playGame = (() => {
     event.target.removeEventListener('click', displayMarkers)
     event.target.textContent = marker
     gameBoard[index] = marker
-    console.log(gameBoard)
     const winner = checkWinner()
-    console.log(winner)
     if(winner === true){
-      displayWinner(currentPlayer)
+      displayWinner(marker)
     } else {
       if(marker === player1.getMarker()){
         currentPlayer = player2.getName()
