@@ -23,6 +23,13 @@ const playGame = (() => {
   // display markers on board
   const displayMarkers = (event) => {
     const index = event.target.getAttribute('data-index')
+    event.target.removeEventListener('click', displayMarkers)
+    event.target.textContent = marker
+    if(marker === player1.getMarker()){
+      marker = player2.getMarker()
+    } else {
+      marker = player1.getMarker()
+    }
     console.log(index)
   }
 
