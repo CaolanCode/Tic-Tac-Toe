@@ -11,6 +11,19 @@ const Player = (name, marker) => {
   return {getName, getMarker}
 }
 
+// display winner on screen
+const displayWinner = ((player) => {
+  const winContainer = document.getElementById('winner-container')
+  winContainer.classList.add('active')
+  winContainer.textContent = `The winner is ${player}`
+})
+
+// clear display when reset
+const clearDisplay = (() => {
+  const winContainer = document.getElementById('winner-container')
+  winContainer.classList.remove('active')
+  winContainer.textContent = ''
+})
 
 // module to play game, run on load
 const playGame = (() => {
@@ -26,18 +39,19 @@ const playGame = (() => {
     event.target.removeEventListener('click', displayMarkers)
     event.target.textContent = marker
     gameBoard[index] = marker
-    if(marker === player1.getMarker()){
-      currentPlayer = player2.getName()
-      marker = player2.getMarker()
-    } else {
-      currentPlayer = player1.getName()
-      marker = player1.getMarker()
-    }
     console.log(gameBoard)
     const winner = checkWinner()
     console.log(winner)
     if(winner === true){
-      console.log("Winner")
+      displayWinner(currentPlayer)
+    } else {
+      if(marker === player1.getMarker()){
+        currentPlayer = player2.getName()
+        marker = player2.getMarker()
+      } else {
+        currentPlayer = player1.getName()
+        marker = player1.getMarker()
+      }
     }
   }
 
@@ -61,6 +75,10 @@ const playGame = (() => {
         gameBoard[i] = ''
         box.textContent = gameBoard[i]
       }
+    currentPlayer = player1.getName()
+    currentPlayer = player1.getName()
+    marker = player1.getMarker()
+    clearDisplay()
     addListener()
   })
 
@@ -101,6 +119,5 @@ const playGame = (() => {
       return false
     }
   })
-  return {addListener}
 })()
 
